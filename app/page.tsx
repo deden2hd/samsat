@@ -1,4 +1,4 @@
-import { DecisionSection } from "@/src/components/sections/DecisionSection";
+import { BrandProofSection } from "@/src/components/sections/BrandProofSection";
 import { DocumentChecklistSection } from "@/src/components/sections/DocumentChecklistSection";
 import { FAQSection } from "@/src/components/sections/FAQSection";
 import { FinalCTA } from "@/src/components/sections/FinalCTA";
@@ -7,8 +7,7 @@ import { HeroSection } from "@/src/components/sections/HeroSection";
 import { HowItWorksSection } from "@/src/components/sections/HowItWorksSection";
 import { Navbar } from "@/src/components/sections/Navbar";
 import { PaymentOptionsSection } from "@/src/components/sections/PaymentOptionsSection";
-import { ProblemSection } from "@/src/components/sections/ProblemSection";
-import { TrustStrip } from "@/src/components/sections/TrustStrip";
+import { QuickCheckSection } from "@/src/components/sections/QuickCheckSection";
 
 export default function Home() {
   return (
@@ -16,9 +15,8 @@ export default function Home() {
       <Navbar />
       <main className="overflow-x-hidden">
         <HeroSection />
-        <TrustStrip />
-        <ProblemSection />
-        <DecisionSection />
+        <BrandProofSection />
+        <QuickCheckSection />
         <HowItWorksSection />
         <DocumentChecklistSection />
         <PaymentOptionsSection />

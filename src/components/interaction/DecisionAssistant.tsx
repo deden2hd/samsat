@@ -139,19 +139,19 @@ export function DecisionAssistant() {
   }
 
   return (
-    <Card className="overflow-hidden p-6 md:p-8">
-      <div className="space-y-6">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <Card className="overflow-hidden border-slate-200/80 p-5 md:p-6">
+      <div className="space-y-5">
+        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm font-medium leading-6 text-text-muted">
+            <p className="text-sm font-medium leading-6 text-neutral-500">
               Progress {Math.min(step + 1, 3)}/3
             </p>
-            <div className="mt-3 flex gap-2">
+            <div className="mt-2 flex gap-2">
               {[0, 1, 2].map((item) => (
                 <span
                   key={item}
                   className={cn(
-                    "h-2 w-12 rounded-full transition duration-200",
+                    "h-1.5 w-10 rounded-full transition duration-200",
                     item < step ? "bg-primary-600" : "bg-neutral-200",
                   )}
                 />
@@ -165,7 +165,7 @@ export function DecisionAssistant() {
               .map(([key, value]) => (
                 <span
                   key={key}
-                  className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs font-medium text-text-secondary"
+                  className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-600"
                 >
                   {answerLabels[value as keyof typeof answerLabels]}
                 </span>
@@ -174,11 +174,11 @@ export function DecisionAssistant() {
         </div>
 
         {!isComplete && currentQuestion ? (
-          <div className="space-y-5">
-            <h3 className="text-2xl font-medium leading-[1.3] tracking-[-0.02em] text-text-primary md:text-3xl md:leading-[1.35]">
+          <div className="space-y-4">
+            <h3 className="text-xl font-medium leading-[1.3] tracking-[-0.02em] text-neutral-900 md:text-2xl md:leading-[1.35]">
               {currentQuestion.question}
             </h3>
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-3 md:grid-cols-2">
               {currentQuestion.options.map((option) => {
                 const isSelected = answers[currentQuestion.key] === option.value;
 
@@ -187,10 +187,10 @@ export function DecisionAssistant() {
                     key={option.value}
                     aria-pressed={isSelected}
                     className={cn(
-                      "rounded-3xl border px-5 py-5 text-left text-base font-medium transition duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-page",
+                      "min-h-12 rounded-2xl border px-4 py-3 text-left text-sm font-medium transition duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-page md:text-base",
                       isSelected
                         ? "border-primary-600 bg-primary-600 text-white"
-                        : "border-neutral-200 bg-white text-text-primary hover:border-primary-200 hover:bg-primary-50/60",
+                        : "border-neutral-200 bg-white text-neutral-900 hover:border-primary-200 hover:bg-primary-50/60",
                     )}
                     onClick={() => handleAnswer(option.value)}
                     type="button"
@@ -203,22 +203,23 @@ export function DecisionAssistant() {
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="rounded-3xl border border-primary-100 bg-primary-50 p-6 md:p-8">
+            <div className="rounded-3xl border border-primary-100 bg-primary-50 p-5 md:p-6">
               <div className="space-y-4">
                 <p className="text-sm font-medium text-primary-700">Rekomendasi</p>
-                <h3 className="text-2xl font-medium leading-[1.3] tracking-[-0.02em] text-text-primary md:text-3xl md:leading-[1.35]">
+                <h3 className="text-xl font-medium leading-[1.3] tracking-[-0.02em] text-neutral-900 md:text-2xl md:leading-[1.35]">
                   {result.title}
                 </h3>
-                <p className="max-w-2xl text-base font-normal leading-7 text-text-secondary">
+                <p className="max-w-2xl text-sm font-normal leading-6 text-neutral-600 md:text-base md:leading-7">
                   {result.description}
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <a className={buttonVariants({})} href={result.href}>
+                  <a className={buttonVariants({ radius: "rounded", size: "md" })} href={result.href}>
                     {result.cta}
                   </a>
                   <Button
                     iconLeft={<RotateCcw className="h-4 w-4" />}
                     onClick={reset}
+                    radius="rounded"
                     variant="ghost"
                   >
                     Ulangi
