@@ -1,71 +1,122 @@
+"use client";
+
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 
 import { Badge } from "@/src/components/ui/Badge";
 import { Container } from "@/src/components/ui/Container";
-import { HeroVisual } from "@/src/components/ui/HeroVisual";
 import { buttonVariants } from "@/src/components/ui/Button";
 
 export function HeroSection() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const reveal = {
+    hidden: shouldReduceMotion ? { y: 0 } : { y: 18 },
+    visible: { y: 0 },
+  };
+  const spring = { damping: 22, stiffness: 360, type: "spring" as const };
+
   return (
     <section
-      className="overflow-hidden bg-gradient-to-b from-primary-50 via-white to-white pb-16 pt-32 md:pb-24 md:pt-36"
+      className="relative min-h-[680px] overflow-hidden bg-white pb-12 pt-28 md:min-h-[840px] md:pb-24 md:pt-36"
       id="beranda"
     >
+      <motion.div
+        animate={shouldReduceMotion ? undefined : { scale: 1 }}
+        className="pointer-events-none absolute inset-0 bg-cover bg-center"
+        initial={shouldReduceMotion ? undefined : { scale: 1.04 }}
+        style={{
+          backgroundImage: "url('/images/hero-section.png')",
+        }}
+        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+      />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[24%] bg-gradient-to-t from-white to-transparent" />
+
       <Container>
-        <div className="flex flex-col items-center text-center">
-          <div className="w-full max-w-[820px] space-y-7">
-            <Badge
-              className="mx-auto w-fit"
-              iconLeft={<ShieldCheck className="h-4 w-4 text-primary-600" />}
-              variant="soft"
+        <motion.div
+          className="relative flex flex-col items-center text-center"
+          animate="visible"
+          initial="hidden"
+          transition={{ staggerChildren: shouldReduceMotion ? 0 : 0.1 }}
+        >
+          <div className="w-full max-w-[820px] space-y-6 md:space-y-7">
+            <motion.div
+              variants={reveal}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              SAMSAT Digital Nasional
-            </Badge>
+              <Badge
+                className="mx-auto w-fit"
+                iconLeft={<ShieldCheck className="h-4 w-4 text-primary-600" />}
+                variant="soft"
+              >
+                SAMSAT Digital Nasional
+              </Badge>
+            </motion.div>
             <div className="space-y-4">
-              <h1 className="mx-auto max-w-[820px] text-4xl font-medium leading-[1.2] tracking-[-0.02em] text-neutral-900 md:text-[64px] md:leading-[1.15]">
-                Bayar pajak kendaraan sekarang bisa dari HP.
-              </h1>
-              <p className="mx-auto max-w-[620px] text-base font-normal leading-7 text-neutral-600 md:text-lg md:leading-8">
+              <motion.h1
+                className="mx-auto max-w-[820px] text-4xl font-medium leading-[1.2] tracking-[-0.02em] text-neutral-900 md:text-[64px] md:leading-[1.15]"
+                variants={reveal}
+                transition={{ duration: 0.58, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Bayar Pajak Kendaraan Sekarang Bisa Dari HP.
+              </motion.h1>
+              <motion.p
+                className="mx-auto max-w-[620px] text-base font-normal leading-7 text-neutral-600 md:text-lg md:leading-8"
+                variants={reveal}
+                transition={{ duration: 0.58, ease: [0.22, 1, 0.36, 1] }}
+              >
                 Lewat SIGNAL, kamu bisa memahami status pajak, menyiapkan dokumen, dan lanjut
                 bayar tanpa antre.
-              </p>
+              </motion.p>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Link
-                className={buttonVariants({
-                  className: "h-14 w-full gap-3 px-6 sm:w-auto",
-                  radius: "rounded",
-                  size: "lg",
-                  variant: "dark",
-                })}
-                href="#final-cta"
+            <motion.div
+              className="mt-7 flex flex-wrap items-center justify-center gap-3 md:mt-8"
+              variants={reveal}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <motion.div
+                className="w-full sm:w-auto"
+                transition={spring}
+                whileHover={shouldReduceMotion ? undefined : { y: -2 }}
+                whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
               >
-                <span>Download SIGNAL</span>
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-white">
+                <Link
+                  className={buttonVariants({
+                    className: "h-14 w-full px-6 sm:w-auto",
+                    radius: "rounded",
+                    size: "lg",
+                    variant: "secondary",
+                  })}
+                  href="#cek-kondisi"
+                >
+                  Cek dulu kondisi saya
+                </Link>
+              </motion.div>
+              <motion.div
+                className="w-full sm:w-auto"
+                transition={spring}
+                whileHover={shouldReduceMotion ? undefined : { y: -2 }}
+                whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
+              >
+                <Link
+                  className={buttonVariants({
+                    className: "h-14 w-full gap-3 px-6 sm:w-auto",
+                    radius: "rounded",
+                    size: "lg",
+                    variant: "dark",
+                  })}
+                  href="#final-cta"
+                >
+                  <span>Download SIGNAL</span>
                   <ArrowUpRight className="h-4 w-4 text-white" />
-                </span>
-              </Link>
-              <Link
-                className={buttonVariants({
-                  className: "h-14 w-full px-6 sm:w-auto",
-                  radius: "rounded",
-                  size: "lg",
-                  variant: "secondary",
-                })}
-                href="#cek-kondisi"
-              >
-                Cek dulu kondisi saya
-              </Link>
-            </div>
+                </Link>
+              </motion.div>
+            </motion.div>
           </div>
 
-          <div className="relative mt-14 w-full md:mt-16">
-            <div className="absolute inset-x-8 top-6 h-32 rounded-full bg-primary-100/70 blur-3xl md:top-8 md:h-40" />
-            <HeroVisual className="relative mx-auto max-w-[980px]" />
-          </div>
-        </div>
+        </motion.div>
       </Container>
     </section>
   );

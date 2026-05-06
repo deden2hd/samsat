@@ -1,8 +1,7 @@
 import { BrandProofSection } from "@/src/components/sections/BrandProofSection";
+import { ClosingSection } from "@/src/components/sections/ClosingSection";
 import { DocumentChecklistSection } from "@/src/components/sections/DocumentChecklistSection";
 import { FAQSection } from "@/src/components/sections/FAQSection";
-import { FinalCTA } from "@/src/components/sections/FinalCTA";
-import { Footer } from "@/src/components/sections/Footer";
 import { HeroSection } from "@/src/components/sections/HeroSection";
 import { HowItWorksSection } from "@/src/components/sections/HowItWorksSection";
 import { Navbar } from "@/src/components/sections/Navbar";
@@ -21,9 +20,8 @@ export default function Home() {
         <DocumentChecklistSection />
         <PaymentOptionsSection />
         <FAQSection />
-        <FinalCTA />
+        <ClosingSection />
       </main>
-      <Footer />
     </>
   );
 }
